@@ -28,7 +28,7 @@ Things you may want to cover:
 
 | Column          | Type    | Options     |
 | --------------- | ------- | ----------- |
-| email           | text    | null: false |
+| email           | string    | null: false |
 | encrypted_password | string | null: false |
 | last_name       | string    | null: false |
 | first_name      | string    | null: false |
@@ -42,17 +42,17 @@ has_many : orders
 has_many : items
 
 
- ## addressテーブル
+ ## addressesテーブル
 
 | Column        | Type          | Options                        |
 | ------------- | ------------- | ------------------------------ |
-| active_hash   | integer          | null: false                    |
+| prefecture_id   | integer          | null: false                    |
 | municipality  | string          | null: false                    |
 | address       | string          | null: false                    |
 | building_name | string        | null: false                    | 
 | phone_number  | integer       | null: false                    |
 | postal_code   | integer       | null: false                    |
-| orders        | references    | null: false, foreign_key: true |
+| order        | references    | null: false, foreign_key: true |
 
 ### Association
 belongs_to : order
@@ -65,13 +65,13 @@ belongs_to : order
 | --------------------- | ------- | ----------- |
 | product_description   | text    | null: false |
 | product_name          | string  | null: false |
-| product_status       | string    | null: false |
-| load              | string    | null: false |
+| product_status_id       | string    | null: false |
+| load_id              | string    | null: false |
 | selling_price         | integer | null: false |
-| ship              | string    | null: false |
-| area              | string    | null: false |
-| category              | string    | null: false |
-| users        | references    | null: false, foreign_key: true |
+| ship_id              | string    | null: false |
+| prefecture_id              | string    | null: false |
+| category_id              | string    | null: false |
+| user        | references    | null: false, foreign_key: true |
 
 ### Association
 has_one : order
@@ -91,4 +91,5 @@ belongs_to : user
 ### Association
 has_one : address
 belongs_to : item
+belongs_to : user
 
