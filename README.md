@@ -29,33 +29,33 @@ Things you may want to cover:
 | Column          | Type    | Options     |
 | --------------- | ------- | ----------- |
 | email           | text    | null: false |
-| password        | integer | null: false |
-| last_name       | text    | null: false |
-| first_name      | text    | null: false |
-| last_name_kana  | text    | null: false |
-| first_name_kana | text    | null: false |
-| nickname        | text    | null: false |
+| encrypted_password | string | null: false |
+| last_name       | string    | null: false |
+| first_name      | string    | null: false |
+| last_name_kana  | string    | null: false |
+| first_name_kana | string   | null: false |
+| nickname        | string    | null: false |
 | birthday        | date    | null: false |
 
 ### Association
-belongs_many : orders
-belongs_many : items
+has_many : orders
+has_many : items
 
 
  ## addressテーブル
 
 | Column        | Type          | Options                        |
 | ------------- | ------------- | ------------------------------ |
-| prefectures   | text          | null: false                    |
-| municipality  | text          | null: false                    |
-| address       | text          | null: false                    |
+| active_hash   | integer          | null: false                    |
+| municipality  | string          | null: false                    |
+| address       | string          | null: false                    |
 | building_name | string        | null: false                    | 
 | phone_number  | integer       | null: false                    |
 | postal_code   | integer       | null: false                    |
 | orders        | references    | null: false, foreign_key: true |
 
 ### Association
-belongs_to : orders
+belongs_to : order
 
 
 ## itemsテーブル
@@ -65,13 +65,16 @@ belongs_to : orders
 | --------------------- | ------- | ----------- |
 | product_description   | text    | null: false |
 | product_name          | string  | null: false |
-| product_details       | text    | null: false |
-| delivery              | text    | null: false |
+| product_status       | string    | null: false |
+| load              | string    | null: false |
 | selling_price         | integer | null: false |
-
+| ship              | string    | null: false |
+| area              | string    | null: false |
+| category              | string    | null: false |
+| users        | references    | null: false, foreign_key: true |
 
 ### Association
-has_one : orders
+has_one : order
 belongs_to : user
 
 
@@ -81,11 +84,11 @@ belongs_to : user
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
-| users  | references | null: false, foreign_key: true |
-| items  | references | null: false, foreign_key: true |
+| user  | references | null: false, foreign_key: true |
+| item  | references | null: false, foreign_key: true |
 
 
 ### Association
 has_one : address
-belongs_to : items
+belongs_to : item
 
