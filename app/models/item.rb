@@ -19,7 +19,7 @@ class Item < ApplicationRecord
     self.image.attached?
   end
 
-  validates :age, numericality: { in: 300..9,999,999 }
+  validates :selling_price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
   validates :product_status_id, numericality: { other_than: 0 , message: "can't be blank"}
 

@@ -41,15 +41,16 @@ describe '出品機能' do
       expect(@item.errors.full_messages).to include("Product name can't be blank")
     end
 
-    it 'product_status_idが空では登録できない' do
-      @item.product_status_id = ''
+    it '商品の状態に「---」が選択されている場合は出品できない
+    ' do
+      @item.product_status_id = '---'
       @item.valid?
       expect(@item.errors.full_messages).to include("Product status can't be blank")
     end
 
     it '配送料の負担に「---」が選択されている場合は出品できない
     ' do
-      @item.load_id  = ''
+      @item.load_id  = '---'
       @item.valid?
       expect(@item.errors.full_messages).to include("Load can't be blank")
     end
@@ -62,20 +63,20 @@ describe '出品機能' do
 
     it '発送までの日数に「---」が選択されている場合は出品できない
     ' do
-      @item.ship_id = ''
+      @item.ship_id = '---'
       @item.valid?
       expect(@item.errors.full_messages).to include("Ship can't be blank")
     end
 
     it '発送元の地域に「---」が選択されている場合は出品できない' do
-      @item.prefecture_id = ''
+      @item.prefecture_id = '---'
       @item.valid?
       expect(@item.errors.full_messages).to include("Prefecture can't be blank")
     end
 
     it 'カテゴリーに「---」が選択されている場合は出品できない
     ' do
-      @item.category_id = ''
+      @item.category_id = '---'
       @item.valid?
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
@@ -90,19 +91,19 @@ describe '出品機能' do
     it '価格に半角数字以外が含まれている場合は出品できない' do
       @item.selling_price = '33ss'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Selling price can't be blank")
+      expect(@item.errors.full_messages).to include("Selling price is not a number")
     end
 
     it '価格が300円未満では出品できない' do
       @item.selling_price = '200'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Selling price can't be blank")
+      expect(@item.errors.full_messages).to include("Selling price must be greater than or equal to 300")
     end
 
     it '価格が9_999_999円を超えると出品できない' do
       @item.selling_price = '33333333'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Selling price can't be blank")
+      expect(@item.errors.full_messages).to include("Selling price must be less than or equal to 9999999")
     end
 
 
