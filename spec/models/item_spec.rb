@@ -47,35 +47,70 @@ describe '出品機能' do
       expect(@item.errors.full_messages).to include("Product status can't be blank")
     end
 
-    it 'load_idが空では登録できない' do
+    it '配送料の負担に「---」が選択されている場合は出品できない
+    ' do
       @item.load_id  = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Load can't be blank")
     end
 
-    it 'selling_priceが空では登録できない' do
+    it '価格が空では出品できない' do
       @item.selling_price = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Selling price can't be blank")
     end
 
-    it 'ship_idが空では登録できない' do
+    it '発送までの日数に「---」が選択されている場合は出品できない
+    ' do
       @item.ship_id = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Ship can't be blank")
     end
 
-    it 'prefecture_idが空では登録できない' do
+    it '発送元の地域に「---」が選択されている場合は出品できない' do
       @item.prefecture_id = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Prefecture can't be blank")
     end
 
-    it 'category_idが空では登録できない' do
+    it 'カテゴリーに「---」が選択されている場合は出品できない
+    ' do
       @item.category_id = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
+
+
+    it 'ユーザーが紐付いていなければ出品できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include('User must exist')
+    end
+
+    it '価格に半角数字以外が含まれている場合は出品できない' do
+      @item.selling_price = '33ss'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Selling price can't be blank")
+    end
+
+    it '価格が300円未満では出品できない' do
+      @item.selling_price = '200'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Selling price can't be blank")
+    end
+
+    it '価格が9_999_999円を超えると出品できない' do
+      @item.selling_price = '33333333'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Selling price can't be blank")
+    end
+
+
+
+
+
+
+
    end
   end
 end  

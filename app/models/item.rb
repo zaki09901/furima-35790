@@ -12,6 +12,15 @@ class Item < ApplicationRecord
   validates :category_id, presence: true
   has_one_attached :image
 
+
+  validates :content, presence: true, unless: :was_attached?
+
+  def was_attached?
+    self.image.attached?
+  end
+
+  validates :age, numericality: { in: 300..9,999,999 }
+
   validates :product_status_id, numericality: { other_than: 0 , message: "can't be blank"}
 
   validates :load_id, numericality: { other_than: 0 , message: "can't be blank"}
