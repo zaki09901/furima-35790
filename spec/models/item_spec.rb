@@ -43,14 +43,14 @@ describe '出品機能' do
 
     it '商品の状態に「---」が選択されている場合は出品できない
     ' do
-      @item.product_status_id = '---'
+      @item.product_status_id = '0'
       @item.valid?
       expect(@item.errors.full_messages).to include("Product status can't be blank")
     end
 
     it '配送料の負担に「---」が選択されている場合は出品できない
     ' do
-      @item.load_id  = '---'
+      @item.load_id  = '0'
       @item.valid?
       expect(@item.errors.full_messages).to include("Load can't be blank")
     end
@@ -63,20 +63,20 @@ describe '出品機能' do
 
     it '発送までの日数に「---」が選択されている場合は出品できない
     ' do
-      @item.ship_id = '---'
+      @item.ship_id = '0'
       @item.valid?
       expect(@item.errors.full_messages).to include("Ship can't be blank")
     end
 
     it '発送元の地域に「---」が選択されている場合は出品できない' do
-      @item.prefecture_id = '---'
+      @item.prefecture_id = '0'
       @item.valid?
       expect(@item.errors.full_messages).to include("Prefecture can't be blank")
     end
 
     it 'カテゴリーに「---」が選択されている場合は出品できない
     ' do
-      @item.category_id = '---'
+      @item.category_id = '0'
       @item.valid?
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
@@ -100,10 +100,11 @@ describe '出品機能' do
       expect(@item.errors.full_messages).to include("Selling price must be greater than or equal to 300")
     end
 
-    it '価格が9_999_999円を超えると出品できない' do
-      @item.selling_price = '33333333'
+
+    it '画像が空では保存できない' do
+      @item.image = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Selling price must be less than or equal to 9999999")
+      expect(@item.errors.full_messages).to include("Image can't be blank")
     end
 
 

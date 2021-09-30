@@ -1,6 +1,12 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
+  belongs_to :product_status
+  belongs_to :load
+  belongs_to :ship
+  belongs_to :prefecture
+  belongs_to :category
+
 
   validates :product_description, presence: true
   validates :product_name, presence: true
@@ -11,13 +17,8 @@ class Item < ApplicationRecord
   validates :prefecture_id, presence: true
   validates :category_id, presence: true
   has_one_attached :image
+  validates :image, presence: true
 
-
-  validates :content, presence: true, unless: :was_attached?
-
-  def was_attached?
-    self.image.attached?
-  end
 
   validates :selling_price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
