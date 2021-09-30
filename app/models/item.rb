@@ -7,7 +7,6 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :category
 
-
   validates :product_description, presence: true
   validates :product_name, presence: true
   validates :product_status_id, presence: true
@@ -19,17 +18,15 @@ class Item < ApplicationRecord
   has_one_attached :image
   validates :image, presence: true
 
-
   validates :selling_price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
-  validates :product_status_id, numericality: { other_than: 0 , message: "can't be blank"}
+  validates :product_status_id, numericality: { other_than: 0, message: "can't be blank" }
 
-  validates :load_id, numericality: { other_than: 0 , message: "can't be blank"}
+  validates :load_id, numericality: { other_than: 0, message: "can't be blank" }
 
-  validates :ship_id, numericality: { other_than: 0 , message: "can't be blank"}
+  validates :ship_id, numericality: { other_than: 0, message: "can't be blank" }
 
-  validates :prefecture_id, numericality: { other_than: 0 , message: "can't be blank"}
+  validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
 
-  validates :category_id, numericality: { other_than: 0 , message: "can't be blank"}
-
+  validates :category_id, numericality: { other_than: 0, message: "can't be blank" }
 end
