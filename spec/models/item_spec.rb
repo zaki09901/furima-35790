@@ -107,6 +107,13 @@ describe '出品機能' do
       expect(@item.errors.full_messages).to include("Image can't be blank")
     end
 
+    it '価格が9,999,999円未満では出品できない' do
+      @item.selling_price = '99999999999'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Selling price must be less than or equal to 9999999")
+    end
+
+
 
 
 
