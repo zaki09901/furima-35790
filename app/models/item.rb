@@ -6,7 +6,8 @@ class Item < ApplicationRecord
   belongs_to :ship
   belongs_to :prefecture
   belongs_to :category
-
+  has_one :order
+  
   validates :product_description, presence: true
   validates :product_name, presence: true
   validates :product_status_id, presence: true

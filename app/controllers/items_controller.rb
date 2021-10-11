@@ -11,13 +11,19 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @items = Item.order("created_at DESC")
+
   end
 
   def edit
-    if @item.user_id ==current_user.id
-    else
-      redirect_to root_path
-    end
+    # if @item.user_id ==current_user.id || @item.order == nil 
+    # else
+    #   redirect_to root_path
+    # end
+    # 出品者とログイン者が違う場合TOPページへ戻す
+    # もしくわ
+    # 商品が売れている場合TOPページへ戻す
+    redirect_to root_path if @item.user_id ==current_user.id || @item.order != nil 
   end
 
   def update
