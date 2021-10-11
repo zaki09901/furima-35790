@@ -68,6 +68,48 @@ RSpec.describe Order, type: :model do
       expect(@order_address.errors.full_messages).to include("Postal code can't be blank", "Postal code を入力してください")
     end
 
+    it "postal_codeが半角ハイフンを含む形でなければ購入できない" do
+      @order_address.postal_code = '12304567'
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Postal code can't be blank", "Postal code を入力してください")
+    end
+
+    it "phone_numberが電話番号が9桁以下では購入できない" do
+      @order_address.phone_number = '1234567890'
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number can't be blank", "Phone number を入力してください")
+    end
+
+    it "phone_numberが電話番号が12桁以上では購入できない" do
+      @order_address.phone_number = '123456789012345'
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number can't be blank", "Phone number を入力してください")
+    end
+
+    it "phone_numberが電話番号に半角数字以外が含まれている場合は購入できない（※半角数字以外が一文字でも含まれていれば良い）" do
+      @order_address.phone_number = '12345678901５2345'
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number can't be blank", "Phone number を入力してください")
+    end
+
+    it 'ユーザーが紐付いていなければ出品できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include('User must exist')
+    end
+
+    it 'itemが紐付いていなければ出品できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include('User must exist')
+    end
+
+
+
+
+
+
+
    end
   end
 end

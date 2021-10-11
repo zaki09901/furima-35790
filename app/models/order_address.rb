@@ -2,13 +2,13 @@ class OrderAddress
   include ActiveModel::Model
   attr_accessor :postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :user_id, :item_id, :token
 
-# with_options presence: true do
-validates :municipality,presence: true
-validates :address,presence: true
-validates :user_id,presence: true
-validates :item_id,presence: true
-validates :token, presence: true
-# end
+with_options presence: true do
+validates :municipality
+validates :address
+validates :user_id
+validates :item_id
+validates :token
+end
 
 validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
 
