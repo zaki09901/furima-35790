@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
     # 出品者とログイン者が違う場合TOPページへ戻す
     # もしくわ
     # 商品が売れている場合TOPページへ戻す
-    redirect_to root_path if @item.user_id ==current_user.id || @item.order != nil 
+    redirect_to root_path if @item.user_id !=current_user.id || @item.order != nil 
   end
 
   def update
